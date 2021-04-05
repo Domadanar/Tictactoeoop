@@ -26,40 +26,21 @@ namespace ConsoleApp5
 
         private bool isGameOver(int n, int[] playingField, bool isCurrentX)
         {
-            int row = n - n % 3;
-            if (playingField[row] == playingField[row + 1] && playingField[row] == playingField[row + 2])
-            {
-                return true;
-            }
+            int currentPlayer = isCurrentX ? 1 : 2;
 
-            int column = n % 3;
-            if (playingField[column] == playingField[column + 3])
+            var currentWinCombinations = winCombination.Where(c => c.Any(e => e == n));
+
+            foreach (var winCombination in currentWinCombinations)
             {
-                if (playingField[column] == playingField[column + 6])
+                if (playingField[winCombination[0]] == currentPlayer && playingField[winCombination[1]] == currentPlayer && playingField[winCombination[2]] == currentPlayer)
                 {
                     return true;
                 }
             }
 
-            if (n % 2 != 0)
-            {
-                return false;
-            }
-
-            if (n % 4 == 0)
-            {
-
-                if (playingField[0] == playingField[4] && playingField[0] == playingField[8])
-                {
-                    return true;
-                }
-                if (n != 4)
-                {
-                    return false;
-                }
-            }
-            return playingField[2] == playingField[4] && playingField[2] == playingField[6];
+            return false;
         }
+
 
         private bool Draw
         {
@@ -76,7 +57,7 @@ namespace ConsoleApp5
             }
         }
 
-        public virtual void startGame()
+        public void startGame()
         {
             bool stopGame = false;
             bool isCurrentX = false;
@@ -85,7 +66,7 @@ namespace ConsoleApp5
                 isCurrentX = !isCurrentX;
                 consoleIO.drawPlayingField(playingField);
                 Console.WriteLine("mark " + (isCurrentX ? "X" : "O"));
-                int n = consoleIO.getNumber(playingField);
+                int n = consoleIO.getNumber();
                 if (n < 0 || n >= playingField.Length || playingField[n] != 0)
                 {
                     Console.WriteLine("\n" + "Choose free cell and enter its number");

@@ -8,7 +8,7 @@ namespace ConsoleApp5
 {
     public class ConsoleIO
     {
-        public virtual void drawPlayingField(int[] playingField)
+        public void drawPlayingField(int[] playingField)
         {
             Console.WriteLine("     |     |     ");
             for (int i = 0; i < playingField.Length; i++)
@@ -44,7 +44,7 @@ namespace ConsoleApp5
             Console.WriteLine("     |     |     ");
         }
 
-        public virtual int getNumber(int[] playingField)
+        public int getNumber()
         {
 
             while (true)
@@ -52,11 +52,13 @@ namespace ConsoleApp5
                 try
                 {
                     int n = int.Parse(Console.ReadLine());
+                    return n;
                 }
                 catch (System.FormatException)
                 {
                     Console.WriteLine("Please enter the number");
                 }
+
 
             }
         }

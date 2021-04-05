@@ -6,8 +6,8 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
-            TicTacToeGame game = new TicTacToeGame();
-            game.startGame();
+            Server gameServer = new Server();
+            gameServer.Start();
         }
     }
 }
